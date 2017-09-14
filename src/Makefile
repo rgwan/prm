@@ -18,7 +18,7 @@
 ## along with this library.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
-BINARY = fancyblink
+BINARY = prm
 
 LDSCRIPT = stm32f103x8.ld
 
@@ -40,4 +40,7 @@ size: $(OBJS) $(BINARY).elf
 dfu:  $(BINARY).bin
 	@printf "  FLASH   $<\n"
 	@$(DFU_UTIL) -d $(USB_ID) -D $(BINARY).bin
+
+swd: $(BINARY).bin
+	st-flash write $(BINARY).bin 0x08000000
 	
